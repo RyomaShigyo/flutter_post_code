@@ -66,7 +66,7 @@ class MyHomePage extends ConsumerWidget {
       return;
     }
     try{
-      //int.parse(text);
+      int.parse(text);
       ref.watch(postCodeProvider.notifier).state = text;
       print(text);
     }catch(e){
