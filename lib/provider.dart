@@ -7,13 +7,13 @@ import 'package:http/http.dart' as http;
 StateProvider<String> postCodeProvider = StateProvider((ref) => '');
 
 FutureProvider<PostCode> apiProvider = FutureProvider((ref) async{
-  final postCode = ref.watch(postCodeProvider.notifier).state;
+  final postCode = ref.watch(postCodeProvider);
   if(postCode.length != 7){
     throw Exception('郵便番号は７桁を入力してください');
   }
 
   final upper = postCode.substring(0,3);//郵便番号の上３桁
-  final lower = postCode.substring(4);//郵便番号の下４桁
+  final lower = postCode.substring(3);//郵便番号の下４桁
 
   final apiUrl = 'https://madefor.github.io/postal-code-api/api/v1/$upper/$lower.json';
   final apiUri = Uri.parse(apiUrl);
