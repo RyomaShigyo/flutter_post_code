@@ -30,29 +30,38 @@ class MyHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    final postCode = ref.watch(apiProvider);
+    final familyPostCode = ref.watch(apiFamilyProvider(ref.watch(postCodeProvider)));
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(title),
       ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             TextField(
               onChanged: (text) => onTextChanged(text, ref),
             ),
-            postCode.when(
-                data: (data) => Column(
-                  children: [
-                    Text(data.data[0].ja.prefecture),
-                    Text(data.data[0].ja.address1),
-                    Text(data.data[0].ja.address2),
-                    Text(data.data[0].ja.address3),
-                    Text(data.data[0].ja.address4),
-                  ],
+            familyPostCode.when(
+                data: (data) => Expanded(
+                  child: ListView.separated(
+                    separatorBuilder:(context, index) => const Divider(),
+                    itemCount: data.data.length,
+                    itemBuilder:(context, index) => ListTile(
+                      title: Column(
+                        children: [
+                          Text(data.data[index].ja.prefecture),
+                          Text(data.data[index].ja.address1),
+                          Text(data.data[index].ja.address2),
+                          Text(data.data[index].ja.address3),
+                          Text(data.data[index].ja.address4),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
                 error: (error, stack) => Text(error.toString()),
                 loading: () => const CircularProgressIndicator())
