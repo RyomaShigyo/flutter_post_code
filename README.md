@@ -1,16 +1,6 @@
 # flutter_post_number
 
-A new Flutter project.
+入力フォームでよくある、郵便番号を入力すると住所が補完される機能を作りました。
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# ＜使用したパッケージ＞
+freezed_annotation, json_annotation, flutter_riverpod, http, build_runner, freezed, json_serializable
